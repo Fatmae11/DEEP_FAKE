@@ -1,5 +1,5 @@
 # استخدمي نسخة Python مناسبة
-FROM python:3.12-slim
+FROM python:3.10-slim
 
 # تثبيت libGL علشان opencv يشتغل
 RUN apt-get update && apt-get install -y libgl1-mesa-glx
