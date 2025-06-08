@@ -1,8 +1,11 @@
 # استخدمي نسخة Python مناسبة
 FROM python:3.10-slim
 
-# تثبيت libGL علشان opencv يشتغل
-RUN apt-get update && apt-get install -y libgl1-mesa-glx
+# تثبيت libGL و build-essential علشان opencv و insightface يشتغلوا
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    build-essential \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # تعيين فولدر العمل
 WORKDIR /app
