@@ -1,24 +1,18 @@
-# استخدمي نسخة Python مناسبة
 FROM python:3.10-slim
 
-# تثبيت libGL و build-essential علشان opencv و insightface يشتغلوا
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
     build-essential \
+    git \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# تعيين فولدر العمل
 WORKDIR /app
 
-# نسخ ملفات المشروع
 COPY . .
 
-# تثبيت المتطلبات
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# البورت اللي هيشتغل عليه السيرفر
 EXPOSE 8000
 
-# أمر التشغيل
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
