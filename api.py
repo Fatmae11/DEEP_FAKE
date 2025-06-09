@@ -24,7 +24,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # تهيئة النموذج مرة واحدة
 model = Model(num_classes=2)
 model_path = "df_model.pt"  # عدل المسار حسب مكان النموذج
-model.load_state_dict(torch.load(model_path, map_location=device))
+model.load_state_dict(torch.load(model_path, map_location=device, weights_only=False))
 model.to(device)
 model.eval()
 
